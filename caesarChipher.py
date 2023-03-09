@@ -1,30 +1,26 @@
-def encrypt(text,s):
-    result = ""
-    # transverse the plain text
-    for i in range(len(text)):
-        char = text[i]
-        # Encrypt uppercase characters in plain text
-        
-        if (char.isupper()):
-            result += chr((ord(char) + s-65) % 26 + 65)
-        # Encrypt lowercase characters in plain text
+alfavit_RU = 'АБВГДЕЁЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯАБВГДЕЁЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯ'
+
+def decrypt(text, offset):
+    result = ''
+    text = text.upper()
+    for i in text:
+        mesto = alfavit_RU.find(i)
+        new_mesto = mesto - offset
+        if i in alfavit_RU:
+            result += alfavit_RU[new_mesto]
         else:
-            result += chr((ord(char) + s - 97) % 26 + 97)
-        return result
+            result += i
+    return result
 
-# message = 'GIEWIVrGMTLIVrHIQS' #encrypted message
-# LETTERS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
-
-def hack(message, letters):
-    for key in range(len(letters)):
-        translated = ''
-        for symbol in message:
-            if symbol in letters:
-                num = letters.find(symbol)
-                num = num - key
-                if num < 0:
-                    num = num + len(letters)
-                translated = translated + letters[num]
-            else:
-                translated = translated + symbol
-    print('Hacking key #%s: %s' % (key, translated))
+def encrypt(text, offset):
+    result = ''
+    text = text.upper()
+    print(text)
+    for i in text:
+        mesto = alfavit_RU.find(i)   # Алгоритм для шифрования сообщения на русском 
+        new_mesto = mesto + offset
+        if i in alfavit_RU:
+            result += alfavit_RU[new_mesto]
+        else:
+            result += i
+    return result
